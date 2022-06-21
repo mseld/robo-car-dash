@@ -1,0 +1,30 @@
+{
+  "name": "systemd-rest",
+  "version": "1.0.0",
+  "description": "REST endpoint for manipulation of linux system services",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mseld/systemd-rest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mseld/systemd-rest/issues"
+  },
+  "homepage": "https://github.com/mseld/systemd-rest#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "linux-shell-command": "^0.0.6",
+    "morgan": "^1.10.0",
+    "sysctlx": "^0.0.7",
+    "uuid": "^8.3.2"
+  }
+}

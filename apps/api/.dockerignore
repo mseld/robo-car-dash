@@ -1,0 +1,15 @@
+# Git
+.git
+.gitignore
+
+# Docker configuration
+Dockerfile
+docker-compose.yml
+docker-compose.yaml
+
+# NPM dependencies
+node_modules
+
+# Other
+npm-debug.log
+readme.md
