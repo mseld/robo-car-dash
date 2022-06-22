@@ -1,23 +1,23 @@
 {
-  "name": "systemd-rest",
+  "name": "robo-car-api",
   "version": "1.0.0",
   "description": "REST endpoint for manipulation of linux system services",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mseld/systemd-rest.git"
+    "url": "git+https://github.com/mseld/robo-car-dash.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mseld/systemd-rest/issues"
+    "url": "https://github.com/mseld/robo-car-dash/issues"
   },
-  "homepage": "https://github.com/mseld/systemd-rest#readme",
+  "homepage": "https://github.com/mseld/robo-car-dash#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
@@ -25,7 +25,10 @@
     "ioredis": "^5.0.6",
     "linux-shell-command": "^0.0.6",
     "morgan": "^1.10.0",
+    "ms": "^2.1.3",
+    "readable-size": "^0.2.0",
     "sysctlx": "^0.0.7",
+    "systeminformation": "^5.11.21",
     "uuid": "^8.3.2"
   }
 }
