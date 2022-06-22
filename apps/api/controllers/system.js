@@ -14,7 +14,6 @@ exports.info = async function (req, res, next) {
       const os_info = await si.osInfo();
       const disk = await si.diskLayout();
       const network_interfaces = await si.networkInterfaces();
-      const services = await si.services('redis, node-red, nginx');
 
       return res.status(200).json({
          time: time,
@@ -27,7 +26,6 @@ exports.info = async function (req, res, next) {
          memory: memory,
          disk: disk,
          network_interfaces: network_interfaces,
-         services: services,
       });
    } catch (ex) {
       res.status(500).json({ message: ex.message })

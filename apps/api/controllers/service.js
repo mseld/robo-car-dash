@@ -1,5 +1,6 @@
-const systemctl = require('../services/systemctl');
+const si = require('systeminformation');
 const cache = require('../services/cache');
+const systemctl = require('../services/systemctl');
 
 const HASH_SERVICE_FAV = "service:fav"
 
@@ -31,20 +32,19 @@ exports.remove = async function (req, res, next) {
 };
 
 exports.list = async function (req, res, next) {
-   let { err, result } = await cache.hgetall(HASH_SERVICE_FAV);
-   if (err) {
-      return res.status(500).json({ message: err.message });
-   }
-
-   if (!result || Object.keys(result) == 0)  {
-      return res.status(200).json([]);
-   }
-
-   systemctl.list(Object.keys(result), function (err, data) {
+   try {
+      let { err, result } = await cache.hgetall(HASH_SERVICE_FAV);
       if (err) {
          return res.status(500).json({ message: err.message });
       }
 
+      if (!result || Object.keys(result) == 0) {
+         return res.status(200).json([]);
+      }
+
+      const services = await si.services((Object.keys(result) || []).join(", "));
       return res.status(200).json(data);
-   })
+   } catch (ex) {
+      return res.status(500).json({ message: ex.message });
+   }
 };
