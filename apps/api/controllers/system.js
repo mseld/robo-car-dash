@@ -5,24 +5,19 @@ const si = require('systeminformation');
 
 exports.info = async function (req, res, next) {
    try {
-      const tiem = si.time();
+      const time = si.time();
       const version = si.version();
       const system = await si.system();
       const cpu_temperature = await si.cpuTemperature()
       const cpu = await si.cpu();
       const memory = await si.mem();
-      const battery = await si.battery();
       const os_info = await si.osInfo();
       const disk = await si.diskLayout();
-      const services = await si.services('redis, node-red, nginx');
       const network_interfaces = await si.networkInterfaces();
-      const audio = await si.audio();
-      const bluetooth = await si.bluetoothDevices();
-      const wifi = await si.wifiNetworks();
-      const usb = await si.usb();
+      const services = await si.services('redis, node-red, nginx');
 
       return res.status(200).json({
-         tiem: tiem,
+         time: time,
          uptime: ms(os.uptime()),
          version: version,
          os_info: os_info,
@@ -30,15 +25,8 @@ exports.info = async function (req, res, next) {
          cpu_temperature: cpu_temperature,
          system: system,
          memory: memory,
-         battery: battery,
          disk: disk,
          network_interfaces: network_interfaces,
-         usb: usb,
-         resorcses: {
-            audio: audio,
-            wifi: wifi,
-            bluetooth: bluetooth,
-         },
          services: services,
       });
    } catch (ex) {
