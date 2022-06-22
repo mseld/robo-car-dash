@@ -1,4 +1,5 @@
-const systemctl = require('./systemctl');
+const cache = require('../services/cache');
+const systemctl = require('../services/systemctl');
 
 exports.list = function (req, res, next) {
    let callback = function (err, data) {
