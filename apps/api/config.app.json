@@ -1,7 +1,7 @@
 {
     "port": 8080,
     "cache": {
-        "host": "redis",
+        "host": "host.docker.internal",
         "port": 6379,
         "db": 0,
         "connectTimeout": 10000,

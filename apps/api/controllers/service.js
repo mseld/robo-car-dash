@@ -1,16 +1,18 @@
-// const systemctl = require('../services/systemctl');
+const systemctl = require('../services/systemctl');
 const cache = require('../services/cache');
 
-// params
 const HASH_SERVICE_FAV = "service:fav"
 
 exports.add = async function (req, res, next) {
-   const key = req.body.key;
+   const service = req.body.service;
    const priority = req.body.priority;
    let obj = {};
-   obj[key] = { priority };
+   obj[service] = JSON.stringify({
+      service,
+      priority
+   });
 
-   let { err, result } = await cache.hset(HASH_SERVICE_FAV, obj, callback);
+   let { err, result } = await cache.hmset(HASH_SERVICE_FAV, obj);
    if (err) {
       return res.status(500).json({ message: err.message });
    }
@@ -18,9 +20,9 @@ exports.add = async function (req, res, next) {
    return res.status(200).json(result);
 };
 
-exports.remove = function (req, res, next) {
-   const key = req.body.service;
-   let { err, result } = await cache.hdel(HASH_SERVICE_FAV, service, callback);
+exports.remove = async function (req, res, next) {
+   const service = req.params.service;
+   let { err, result } = await cache.hdel(HASH_SERVICE_FAV, service);
    if (err) {
       return res.status(500).json({ message: err.message });
    }
@@ -28,12 +30,21 @@ exports.remove = function (req, res, next) {
    return res.status(200).json(result);
 };
 
-exports.list = function (req, res, next) {
+exports.list = async function (req, res, next) {
    let { err, result } = await cache.hgetall(HASH_SERVICE_FAV);
    if (err) {
       return res.status(500).json({ message: err.message });
    }
 
-   // systemctl.list()
-   return res.status(200).json(result);
+   if (!result || Object.keys(result) == 0)  {
+      return res.status(200).json([]);
+   }
+
+   systemctl.list(Object.keys(result), function (err, data) {
+      if (err) {
+         return res.status(500).json({ message: err.message });
+      }
+
+      return res.status(200).json(data);
+   })
 };
