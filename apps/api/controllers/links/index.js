@@ -1,12 +1,30 @@
-exports.list = function (req, res, next) {
-    let callback = function (err, data) {
-       if (err) {
-          console.log(err);
-          return res.status(500).json({ message: err.message });
-       }
+const cache = require('./cache');
 
-       return res.status(200).json(data);
-    };
+exports.add = function (req, res, next) {
+   const service = req.body.service;
+   const priority = req.body.priority;
+   let callback = function (err, data) {
+      if (err) {
+         console.log(err);
+         return res.status(500).json({ message: err.message });
+      }
 
-    callback([{message : "not implemented"}])
- };
+      return res.status(200).json(data);
+   };
+
+   cache.add(service, priority, callback);
+};
+
+exports.remove = function (req, res, next) {
+   const service = req.params.service;
+   let callback = function (err, data) {
+      if (err) {
+         console.log(err);
+         return res.status(500).json({ message: err.message });
+      }
+
+      return res.status(200).json(data);
+   };
+
+   cache.remove(service, callback);
+};
