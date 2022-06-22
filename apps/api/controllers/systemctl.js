@@ -1,94 +1,71 @@
 const cache = require('../services/cache');
 const systemctl = require('../services/systemctl');
 
-exports.list = function (req, res, next) {
-   let callback = function (err, data) {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
-
-      return res.status(200).json(data);
-   };
-
-   let fn = (err, services) => {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
-
-      systemctl.list(services, callback);
+exports.list = async function (req, res, next) {
+   let { err, result } = await systemctl.list();
+   if (err) {
+      return res.status(500).json({ message: err.message });
    }
 
-   systemctl.list_names(fn);
+   return res.status(200).json(result);
 };
 
-exports.status = function (req, res, next) {
+exports.status = async function (req, res, next) {
    const service = req.params.service;
-   let callback = function (err, data) {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
+   let { err, result } = await systemctl.status(service);
+   if (err) {
+      return res.status(500).json({ message: err.message });
+   }
 
-      return res.status(200).json(data);
-   };
-   systemctl.status(service, callback);
+   return res.status(200).json(result);
 };
 
-exports.start = function (req, res, next) {
+exports.start = async function (req, res, next) {
    const service = req.params.service;
-   let callback = function (err, data) {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
+   let { err, result } = await systemctl.start(service);
+   if (err) {
+      return res.status(500).json({ message: err.message });
+   }
 
-      return res.status(200).json(data);
-   };
-   systemctl.start(service, callback);
+   return res.status(200).json(result);
 };
 
-exports.stop = function (req, res, next) {
+exports.stop = async function (req, res, next) {
    const service = req.params.service;
-   let callback = function (err, data) {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
+   let { err, result } = await systemctl.stop(service);
+   if (err) {
+      return res.status(500).json({ message: err.message });
+   }
 
-      return res.status(200).json(data);
-   };
-   systemctl.stop(service, callback);
+   return res.status(200).json(result);
 };
 
-exports.restart = function (req, res, next) {
+exports.restart = async function (req, res, next) {
    const service = req.params.service;
-   let callback = function (err, data) {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
+   let { err, result } = await systemctl.restart(service);
+   if (err) {
+      return res.status(500).json({ message: err.message });
+   }
 
-      return res.status(200).json(data);
-   };
-   systemctl.restart(service, callback);
+   return res.status(200).json(result);
 };
 
-exports.enable = function (req, res, next) {
+exports.enable = async function (req, res, next) {
    const service = req.params.service;
-   let callback = function (err, data) {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
+   let { err, result } = await systemctl.enable(service);
+   if (err) {
+      return res.status(500).json({ message: err.message });
+   }
 
-      return res.status(200).json(data);
-   };
-   systemctl.enable(service, callback);
+   return res.status(200).json(result);
 };
 
-exports.disable = function (req, res, next) {
+exports.disable = async function (req, res, next) {
    const service = req.params.service;
-   let callback = function (err, data) {
-      if (err) {
-         return res.status(500).json({ message: err.message });
-      }
+   let { err, result } = await systemctl.disable(service);
+   if (err) {
+      return res.status(500).json({ message: err.message });
+   }
 
-      return res.status(200).json(data);
-   };
-   systemctl.disable(service, callback);
+   return res.status(200).json(result);
 };
