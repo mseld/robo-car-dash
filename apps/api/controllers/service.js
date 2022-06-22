@@ -43,7 +43,7 @@ exports.list = async function (req, res, next) {
       }
 
       const services = await si.services((Object.keys(result) || []).join(", "));
-      return res.status(200).json(data);
+      return res.status(200).json(services);
    } catch (ex) {
       return res.status(500).json({ message: ex.message });
    }
