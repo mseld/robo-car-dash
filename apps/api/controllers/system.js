@@ -18,7 +18,7 @@ exports.info = async function (req, res, next) {
 
       return res.status(200).json({
          time: time,
-         uptime: ms(os.uptime()),
+         uptime: ms(os.uptime() * 1000),
          version: version,
          os_info: os_info,
          cpu: cpu,
