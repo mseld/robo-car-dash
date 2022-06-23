@@ -36,7 +36,7 @@ exports.add = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
 
 exports.remove = async function (req, res, next) {
@@ -46,5 +46,5 @@ exports.remove = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send("OK");
 };

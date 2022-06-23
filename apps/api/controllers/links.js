@@ -10,13 +10,14 @@ exports.list = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   let data = {}
+   let data = []
    for (const key in result) {
       if (Object.hasOwnProperty.call(result, key)) {
          const item = result[key];
-         data[key] = JSON.parse(item);
+         data.push(JSON.parse(item));
       }
    }
+
    return res.status(200).json(data);
 };
 
@@ -38,15 +39,15 @@ exports.add = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
 
 exports.remove = async function (req, res, next) {
    const key = req.params.key;
-   let { err, result } = await cache.hdel(HASH_BOOKMARK_LINK, key);
+   let { err } = await cache.hdel(HASH_BOOKMARK_LINK, key);
    if (err) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send("OK");
 };

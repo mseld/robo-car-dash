@@ -17,7 +17,7 @@ exports.status = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
 
 exports.start = async function (req, res, next) {
@@ -27,7 +27,7 @@ exports.start = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
 
 exports.stop = async function (req, res, next) {
@@ -37,7 +37,7 @@ exports.stop = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
 
 exports.restart = async function (req, res, next) {
@@ -47,7 +47,7 @@ exports.restart = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
 
 exports.enable = async function (req, res, next) {
@@ -57,7 +57,7 @@ exports.enable = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
 
 exports.disable = async function (req, res, next) {
@@ -67,5 +67,5 @@ exports.disable = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   return res.status(200).send(result);
 };
