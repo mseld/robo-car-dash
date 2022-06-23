@@ -10,7 +10,14 @@ exports.list = async function (req, res, next) {
       return res.status(500).json({ message: err.message });
    }
 
-   return res.status(200).json(result);
+   let data = {}
+   for (const key in result) {
+      if (Object.hasOwnProperty.call(result, key)) {
+         const item = result[key];
+         data[key] = JSON.parse(item);
+      }
+   }
+   return res.status(200).json(data);
 };
 
 exports.add = async function (req, res, next) {
