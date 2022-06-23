@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/links');
+const controller = require('../controllers/bookmarks');
 
 router.get('/', controller.list);
 router.post('/', controller.add);

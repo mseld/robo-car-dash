@@ -1264,12 +1264,12 @@ body {
 
 /* vehicles status */
 
-.disconnected {
+.svc-state-false {
     font-style: italic;
     color: #ff5454;
 }
 
-.connected {
+.svc-state-true {
     color: #3fd73f;
     /* font-weight: 600; */
 }

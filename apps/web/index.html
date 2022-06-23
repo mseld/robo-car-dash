@@ -86,11 +86,19 @@
                                     <div>
                                         <div>
                                             <div class="panel-heading with-border">
-                                                <h2> <span class="widget-icon"> <i class="glyphicon glyphicon-bookmark"></i> </span> <strong id="TableTitle"> Links </strong> <small>Favorite</small></h2>
+                                                <h2> <span class="widget-icon"> <i class="glyphicon glyphicon-bookmark"></i> </span> <strong id="TableTitle"> Bookmarks </strong> <small>Favorite</small></h2>
                                             </div>
 
                                             <div class="panel-body collapse in">
-                                                links...
+                                                <div style="height: calc(100vh - 100px);color: black;" class="table-responsive">
+                                                    <table class="table table-hover small-font">
+                                                        <tbody>
+                                                            <tr ng-repeat="bookmark in bookmarks">
+                                                                <td><a href="{{bookmark.url}}">{{bookmark.key}}</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +123,22 @@
                                             </div>
 
                                             <div class="panel-body collapse in">
-                                                services...
+                                                <div style="height: calc(100vh - 100px);color: black;" class="table-responsive">
+                                                    <table class="table table-hover small-font">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Service name</th>
+                                                                <th><i class="glyphicon glyphicon-signal"></i> Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="service in services">
+                                                                <td>{{service.name}}</td>
+                                                                <td class="svc-state-{{service.running}}">{{vehicle.running}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
